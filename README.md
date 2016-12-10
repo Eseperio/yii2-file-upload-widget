@@ -104,9 +104,7 @@ public function actionImageUpload()
 
     $imageFile = UploadedFile::getInstance($model, 'image');
     $directory = \Yii::getAlias('@frontend/web/img/temp') . DIRECTORY_SEPARATOR . Yii::$app->session->id . DIRECTORY_SEPARATOR;
-    if (!is_dir($directory)) {
-        mkdir($directory);
-    }
+    FileHelper::createDirectory($directory)
     if ($imageFile) {
         $uid = uniqid(time(), true);
         $fileName = $uid . '.' . $imageFile->extension;
